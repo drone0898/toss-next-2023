@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="java.text.NumberFormat"/>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="toss.next.drone0898.viewmodel.MenuDetailViewModel" />
+        <variable
+            name="item"
+            type="toss.next.drone0898.data.model.CaffeItem" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_btn"
+            android:backgroundTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/round_backspace_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/menu_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:text="@{item.name}"
+            tools:text="아메리카노"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/back_btn" />
+        <TextView
+            android:id="@+id/menu_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{NumberFormat.getNumberInstance().format(item.cost) + '원'}"
+            tools:text="1,000원"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_name" />
+
+        <TextView
+            android:id="@+id/hot_or_ice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/menu_cost"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/basic"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/hot_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/hot"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/hot_or_ice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ice_btn"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ice_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/ice"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/hot_or_ice"
+            app:layout_constraintStart_toEndOf="@id/hot_btn"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/decaffeine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ice_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{item.canChooseDecaff ? View.VISIBLE : View.GONE}"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/decaffeine"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/caffeine_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/caffeine"
+            android:visibility="@{item.canChooseDecaff ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/decaffeine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/decaffeine_btn"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/decaffeine_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/decaffeine"
+            android:visibility="@{item.canChooseDecaff ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/decaffeine"
+            app:layout_constraintStart_toEndOf="@id/caffeine_btn"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/ice_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/decaffeine_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/water_ice"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/little"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/little"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/ice_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/normal"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/normal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/normal"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/ice_label"
+            app:layout_constraintStart_toEndOf="@id/little"
+            app:layout_constraintEnd_toStartOf="@id/large"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/large"
+            android:visibility="@{item.canChooseHotOrIce ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/ice_label"
+            app:layout_constraintStart_toEndOf="@id/normal"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/order"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
